@@ -1,0 +1,17 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=whatsapp_users_dev;encrypt=false;trustServerCertificate=true
+    username: sa
+    password: YourPassword123
+  jpa:
+    show-sql: true
+  flyway:
+    enabled: true
+
+logging:
+  level:
+    com.whatsapp.userservice: DEBUG
+    org.springframework.security: DEBUG
