@@ -1,11 +1,11 @@
 server:
-  port: 8081
+  port: 8085
 
 spring:
   datasource:
-    url: jdbc:sqlserver://localhost:1433;databaseName=whatsapp_users_dev;encrypt=false;trustServerCertificate=true
+    url: jdbc:sqlserver://127.0.0.1:1433;databaseName=whatsapp_users_dev;encrypt=false;trustServerCertificate=true
     username: sa
-    password: YourPassword123
+    password: Saad@12345
   jpa:
     show-sql: true
   flyway:

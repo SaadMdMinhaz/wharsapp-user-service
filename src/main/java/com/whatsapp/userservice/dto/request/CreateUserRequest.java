@@ -3,7 +3,11 @@ package com.whatsapp.userservice.dto.request;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.util.UUID;
+
 public record CreateUserRequest(
+        UUID id,
+
         @NotBlank(message = "Phone number is required")
         @Size(min = 10, max = 20, message = "Phone number must be between 10 and 20 characters")
         String phoneNumber,

@@ -56,6 +56,9 @@ public class UserServiceImpl implements UserService {
         }
 
         User user = userMapper.toEntity(request);
+        if (user.getId() == null) {
+            user.setId(java.util.UUID.randomUUID());
+        }
         user = userRepository.save(user);
 
         createDefaultPrivacy(user.getId());

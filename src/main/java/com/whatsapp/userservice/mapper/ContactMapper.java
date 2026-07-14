@@ -14,6 +14,7 @@ public interface ContactMapper {
     @Mapping(target = "createdAt", ignore = true)
     Contact toEntity(AddContactRequest request);
 
+    @Mapping(target = "id", source = "contact.id")
     @Mapping(target = "contactUserId", source = "contact.contactUserId")
     @Mapping(target = "nickname", source = "contact.nickname")
     @Mapping(target = "displayName", source = "user.displayName")

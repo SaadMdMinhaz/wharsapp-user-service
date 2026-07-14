@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-07-09T22:48:46+0600",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 25 (Oracle Corporation)"
+    date = "2026-07-14T12:48:49+0600",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 18.0.2-ea (Private Build)"
 )
 @Component
 public class PrivacyMapperImpl implements PrivacyMapper {
