@@ -9,7 +9,7 @@ public record CreateUserRequest(
         UUID id,
 
         @NotBlank(message = "Phone number is required")
-        @Size(min = 10, max = 20, message = "Phone number must be between 10 and 20 characters")
+        @Size(min = 3, max = 100, message = "Phone number must be between 3 and 100 characters")
         String phoneNumber,
 
         @NotBlank(message = "Username is required")

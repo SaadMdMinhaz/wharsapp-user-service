@@ -41,14 +41,37 @@ public class ContactServiceImpl implements ContactService {
     @Transactional(readOnly = true)
     public List<ContactResponse> getContacts(UUID ownerUserId) {
         log.debug("Fetching contacts for user: {}", ownerUserId);
-        List<Contact> contacts = contactRepository.findByOwnerUserId(ownerUserId);
-        return contacts.stream()
-                .map(contact -> {
-                    User contactUser = userRepository.findById(contact.getContactUserId())
-                            .orElse(null);
-                    return contactMapper.toResponse(contact, contactUser);
-                })
-                .toList();
+        try {
+            List<Contact> contacts = contactRepository.findByOwnerUserId(ownerUserId);
+            return contacts.stream()
+                    .map(contact -> {
+                        try {
+                            User contactUser = userRepository.findById(contact.getContactUserId())
+                                    .orElse(null);
+                            if (contactUser == null) {
+                                log.warn("Contact user {} not found in users table, returning basic info", contact.getContactUserId());
+                                return new ContactResponse(
+                                        contact.getId(),
+                                        contact.getContactUserId(),
+                                        contact.getNickname(),
+                                        null,
+                                        null,
+                                        null,
+                                        contact.getCreatedAt()
+                                );
+                            }
+                            return contactMapper.toResponse(contact, contactUser);
+                        } catch (Exception e) {
+                            log.error("Error mapping contact {}: {}", contact.getId(), e.getMessage());
+                            return null;
+                        }
+                    })
+                    .filter(c -> c != null)
+                    .toList();
+        } catch (Exception e) {
+            log.error("Failed to fetch contacts for user {}: {}", ownerUserId, e.getMessage(), e);
+            return List.of();
+        }
     }
 
     @Override
